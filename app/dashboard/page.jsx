@@ -1,7 +1,8 @@
 import { UserButton } from '@clerk/nextjs'
 import React from 'react'
+import PreAssessment from './PresAssessment';
 
-function Dashboard() {
+/*function Dashboard() {
   return (
     <div>Dashboard
     <UserButton></UserButton>
@@ -9,4 +10,11 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Dashboard*/
+
+
+function Dashboard() {
+  return <PreAssessment />;
+}
+
+export default Dashboard;
