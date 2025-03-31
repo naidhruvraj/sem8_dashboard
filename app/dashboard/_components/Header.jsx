@@ -17,44 +17,61 @@ function Header() {
   const role = user?.publicMetadata?.role;
 
   return (
-    <div className="flex p-4 items-center justify-between bg-secondary shadow-md">
-      <Image src={"/logo.svg"} width={160} height={100} alt="logo" />
-      <ul className="flex gap-6">
-        <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
+    <div
+      className="relative flex items-center justify-between px-8 py-4 shadow-lg text-white"
+      style={{
+        backgroundImage: "url('https://picjumbo.com/wp-content/uploads/abstract-background-free-photo.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Dark overlay for better readability */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      {/* Logo (if needed) */}
+      <div className="relative z-10 flex items-center gap-3">
+        {/* <Image src="/logo.svg" width={140} height={80} alt="Logo" /> */}
+        <h1 className="text-2xl font-bold tracking-wide">Learning Life</h1>
+      </div>
+
+      {/* Navigation Links */}
+      <ul className="relative z-10 flex gap-8 text-lg">
+        <li className="relative group">
           <Link href={role === "teacher" ? "/dashboard/teacher" : "/dashboard/student"}>
             Dashboard
           </Link>
+          <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </li>
 
         {role === "teacher" ? (
           <>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
+            <li className="relative group">
               <Link href="/modules/teacher">Manage Modules</Link>
+              <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
+            <li className="relative group">
               <Link href="/assessments/teacher">Assessment Reports</Link>
-            </li>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
-              <Link href="/profile/teacher">Profile</Link>
+              <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
           </>
         ) : (
           <>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
+            <li className="relative group">
               <Link href="/modules/student">Modules</Link>
+              <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
+            <li className="relative group">
               <Link href="/assessments/student">Assessments</Link>
-            </li>
-            <li className="hover:text-primary hover:font-bold transition-all cursor-pointer">
-              <Link href="/profile/student">Profile</Link>
+              <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
           </>
         )}
       </ul>
 
-      {/* ✅ Fix: Ensure sign-out redirects to /sign-in */}
-      <UserButton afterSignOutUrl="/dashboard" />
+      {/* User Profile & Logout Button */}
+      <div className="relative z-10">
+        <UserButton afterSignOutUrl="/dashboard" />
+      </div>
     </div>
   );
 }

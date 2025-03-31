@@ -20,5 +20,14 @@ export default function DashboardPage() {
     }
   }, [isLoaded, user, router]);
 
-  return <div>Loading...</div>; // Temporary fallback
+  return (
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center text-white p-8"
+      style={{ backgroundImage: "url('https://picjumbo.com/wp-content/uploads/abstract-background-free-photo.jpg')" }}
+    >
+      <p className="text-white text-lg font-semibold bg-black/50 px-6 py-3 rounded-lg">
+        Loading...
+      </p>
+    </div>
+  );
 }
