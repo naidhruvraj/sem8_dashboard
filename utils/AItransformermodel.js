@@ -16,7 +16,7 @@ const model = genAI.getGenerativeModel({
 
 async function generateQuestions() {
   const prompt = `
-Generate me 10 multiple-choice questions (MCQ) related to simple mathematics and verbal IQ.
+Generate me 10 multiple-choice questions (MCQ) related to moderate mathematics and logical IQ. The questions must be best fit for determining a student's IQ.
 Provide the output strictly in this JSON format:
 
 [

@@ -21,13 +21,14 @@ export default function DashboardPage() {
   }, [isLoaded, user, router]);
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center text-white p-8"
-      style={{ backgroundImage: "url('https://picjumbo.com/wp-content/uploads/abstract-background-free-photo.jpg')" }}
-    >
-      <p className="text-white text-lg font-semibold bg-black/50 px-6 py-3 rounded-lg">
-        Loading...
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#b053f3] to-[#bc85ef] text-white p-8">
+    {/* Spinning Loader Animation */}
+      <div className="flex flex-col items-center space-y-4">
+      <div className="h-12 w-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+      <p className="text-lg font-semibold bg-white/20 px-6 py-3 rounded-lg backdrop-blur-md">
+        Loading, please wait...
       </p>
+    </div>
     </div>
   );
 }
