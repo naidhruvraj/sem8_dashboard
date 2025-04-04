@@ -41,7 +41,6 @@
 // }
 
 // export default DashboardLayout;
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -104,11 +103,12 @@ function DashboardLayout({ children }) {
     checkPreAssessmentStatus();
   }, [isLoaded, user, router]);
 
-  // ✅ Show loading only when authentication is being checked
+  // ✅ Show engaging loading screen while authentication is in progress
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <p className="text-gray-600 text-lg font-semibold">Authenticating...</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-purple-400">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-white border-t-transparent mb-4"></div>
+        <p className="text-white text-lg font-semibold">Authenticating...</p>
       </div>
     );
   }

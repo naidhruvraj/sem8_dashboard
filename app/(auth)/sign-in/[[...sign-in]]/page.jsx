@@ -34,6 +34,7 @@ export default function LoginPage() {
           <SignIn />
         </div>
       </motion.div>
+      
     </div>
   );
 }

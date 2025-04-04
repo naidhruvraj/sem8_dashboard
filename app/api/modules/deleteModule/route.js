@@ -59,7 +59,6 @@ export async function DELETE(req) {
 }
 
 
-
 // import { connectToDatabase } from "@/lib/mongodb";
 // import { ObjectId } from "mongodb";
 // import { NextResponse } from "next/server";
@@ -81,35 +80,56 @@ export async function DELETE(req) {
 //       return NextResponse.json({ error: "Module ID is required" }, { status: 400 });
 //     }
 
-//     const db = await connectToDatabase();
-//     const moduleCollection = db.collection("modules");
+//     // ✅ Connect to MongoDB
+//     const { db } = await connectToDatabase();
+//     if (!db) {
+//       return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
+//     }
 
-//     // Fetch module to get the video URL
-//     const module = await moduleCollection.findOne({ _id: new ObjectId(id) });
+//     const modulesCollection = db.collection("modules");
+
+//     // ✅ Find the module to get the video URL
+//     const module = await modulesCollection.findOne({ _id: new ObjectId(id) });
 //     if (!module) {
 //       return NextResponse.json({ error: "Module not found" }, { status: 404 });
 //     }
 
 //     const videoUrl = module.videoUrl;
+//     let cloudinaryDeleted = false;
 
-//     // Extract the public ID from Cloudinary URL
-//     const parts = videoUrl.split("/");
-//     const publicIdWithExtension = parts[parts.length - 1]; // e.g., "abcd1234.mp4"
-//     const publicId = `learning-modules/${publicIdWithExtension.split(".")[0]}`; // Include folder path
+//     if (videoUrl && videoUrl.startsWith("https://res.cloudinary.com/")) {
+//       // ✅ Extract the public ID from Cloudinary URL
+//       const urlParts = videoUrl.split("/");
+//       const publicIdWithExtension = urlParts[urlParts.length - 1]; // Example: "abcd1234.mp4"
+//       const publicId = `learning-modules/${publicIdWithExtension.split(".")[0]}`; // Include folder path
 
-//     // Delete video from Cloudinary
-//     const cloudinaryResponse = await cloudinary.v2.uploader.destroy(publicId, { resource_type: "video" });
+//       // ✅ Attempt to delete the video from Cloudinary
+//       try {
+//         const cloudinaryResponse = await cloudinary.v2.uploader.destroy(publicId, { resource_type: "video" });
 
-//     if (cloudinaryResponse.result !== "ok") {
-//       return NextResponse.json({ error: "Failed to delete video from Cloudinary" }, { status: 500 });
+//         if (["ok", "not found"].includes(cloudinaryResponse.result)) {
+//           cloudinaryDeleted = true;
+//         } else {
+//           console.warn("⚠️ Cloudinary Deletion Warning:", cloudinaryResponse);
+//         }
+//       } catch (cloudError) {
+//         console.error("❌ Cloudinary API Error:", cloudError);
+//       }
 //     }
 
-//     // Delete module from MongoDB
-//     await moduleCollection.deleteOne({ _id: new ObjectId(id) });
+//     // ✅ Delete module from MongoDB
+//     await modulesCollection.deleteOne({ _id: new ObjectId(id) });
 
-//     return NextResponse.json({ message: "Module and video deleted successfully!" }, { status: 200 });
+//     return NextResponse.json(
+//       { 
+//         message: "Module deleted successfully", 
+//         cloudinaryStatus: cloudinaryDeleted ? "Video deleted from Cloudinary" : "No video or deletion failed" 
+//       }, 
+//       { status: 200 }
+//     );
+
 //   } catch (error) {
-//     console.error("Error deleting module:", error);
-//     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+//     console.error("❌ Error deleting module:", error);
+//     return NextResponse.json({ error: `Internal Server Error: ${error.message}` }, { status: 500 });
 //   }
 // }

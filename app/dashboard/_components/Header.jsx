@@ -50,7 +50,7 @@ function Header() {
               <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
             <li className="relative group">
-              <Link href="/assessments/teacher">Assessment Reports</Link>
+              <Link href="/maintest/teacher">Assessment Reports</Link>
               <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
           </>
@@ -61,7 +61,7 @@ function Header() {
               <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
             <li className="relative group">
-              <Link href="/assessments/student">Assessments</Link>
+              <Link href="/maintest/student">Assessments</Link>
               <div className="absolute left-0 w-full h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
           </>

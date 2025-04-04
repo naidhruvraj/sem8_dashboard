@@ -561,11 +561,13 @@ const MCQAssessment = () => {
 
       {/* Middle Panel - Question Display */}
       <div className="w-3/5 px-10">
-        {loading ? (
-          <div className="flex justify-center items-center h-full">
-            <p className="text-2xl font-bold text-gray-600">Fetching questions...</p>
-          </div>
-        ) : (
+      {loading ? (
+        <div className="flex flex-col justify-center items-center h-full text-center space-y-4">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-opacity-75"></div>
+        <p className="text-2xl font-semibold text-gray-700">Fetching your challenge... ⏳</p>
+        <p className="text-lg text-gray-500 italic">"Stay focused, and trust your instincts!"</p>
+        </div>
+      ) : (
           questions
             .filter((q) => q.id === currentQuestion)
             .map((q) => (
